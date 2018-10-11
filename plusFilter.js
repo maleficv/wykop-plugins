@@ -13,21 +13,21 @@ filterButton.addEventListener('click', handleClick);
 
 bar.appendChild(filterButton);
 
-const elements = document.getElementsByClassName('vC');
-
 function handleClick() {
     if (filterButton.classList.contains('active')) {
         return restore();
     }
 
     return filter();
-
 }
 
 function filter() {
+    const elements = document.getElementsByClassName('vC');
+
     filterButton.classList.add('active');
 
-    Array.prototype.map.call(elements, (el) => {
+    Array.prototype.map.call(elements, (el, index) => {
+        if (index === 0) return;
         const span = el.getElementsByTagName('SPAN')[0];
         if (parseInt(span.innerHTML) < 100) {
             el.closest('li').style.display = 'none';
@@ -38,6 +38,8 @@ function filter() {
 }
 
 function restore() {
+    const elements = document.getElementsByClassName('vC');
+
     filterButton.classList.remove('active');
 
     Array.prototype.map.call(elements, (el) => {
@@ -49,6 +51,12 @@ function restore() {
 
     localStorage.removeItem('wykopFilterByPlus');
 }
+
+document.querySelector('.more .affect.ajax').addEventListener('click', () => {
+    setTimeout(() => {
+        filter();
+    }, 1000)
+});
 
 if (localStorage.getItem('wykopFilterByPlus')) {
     filter();

@@ -13,6 +13,7 @@ filterButton.addEventListener('click', handleClick);
 
 bar.appendChild(filterButton);
 
+
 function handleClick() {
     if (filterButton.classList.contains('active')) {
         return restore();
@@ -52,11 +53,15 @@ function restore() {
     localStorage.removeItem('wykopFilterByPlus');
 }
 
-document.querySelector('.more .affect.ajax').addEventListener('click', () => {
-    setTimeout(() => {
-        filter();
-    }, 1000)
-});
+const loadMore = document.querySelector('.more .affect.ajax')
+
+if (loadMore) {
+    loadMore.addEventListener('click', () => {
+        setTimeout(() => {
+            filter();
+        }, 1000)
+    });
+}
 
 if (localStorage.getItem('wykopFilterByPlus')) {
     filter();

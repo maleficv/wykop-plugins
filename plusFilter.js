@@ -53,9 +53,9 @@ function restore() {
     localStorage.removeItem('wykopFilterByPlus');
 }
 
-const loadMore = document.querySelector('.more .affect.ajax')
+const loadMore = document.querySelector('.more .affect.ajax');
 
-if (loadMore) {
+if (loadMore && localStorage.getItem('wykopFilterByPlus')) {
     loadMore.addEventListener('click', () => {
         setTimeout(() => {
             filter();

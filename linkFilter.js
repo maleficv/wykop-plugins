@@ -30,6 +30,13 @@ const markedUrls = [
   }
 ];
 
+const markedUsers = [
+  {
+    name: 'bioslawek',
+    type: 'warning'
+  }
+];
+
 const colourMap = {
   night: {
     warning: '#3c2c2c',
@@ -48,6 +55,8 @@ const posts = container.getElementsByClassName('link');
 
 Array.prototype.forEach.call(posts, function(post) {
   const source = post.querySelector('.tag.create a');
+  const reporter = post.querySelector('.fix-tagline a.affect');
+  const reporterName = reporter && reporter.innerHTML.split('</em>')[1];
 
   if (!source) return;
 
@@ -57,6 +66,16 @@ Array.prototype.forEach.call(posts, function(post) {
       	post.style.display = 'none';
       } else {
         post.style.backgroundColor = colourMap[theme][mark.type];
+      }
+    }
+  })
+  
+  markedUsers.forEach(function(user) {
+    if (user.name === reporterName) {
+       if (user.type === 'banned') {
+      	post.style.display = 'none';
+      } else {
+        post.style.backgroundColor = colourMap[theme][user.type];
       }
     }
   })
